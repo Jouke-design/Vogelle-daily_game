@@ -77,6 +77,7 @@ function nextRound(){
     document.getElementById("myInput").parentElement.parentElement.style.display = "";
     document.getElementById("subCont").innerHTML = "";
     document.getElementById("birdImage").style.filter = "";
+    document.getElementById("birdImage").classList.remove("win_animation");
     fetchData();
 }
 
@@ -338,6 +339,7 @@ function guessRevealer(x){
 
     if(x==1){
         document.getElementById("title").innerHTML = bird.name;
+        document.getElementById("birdImage").classList.add("win_animation");
         guessAmount = 0;
         return
     }
