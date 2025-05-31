@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+    <head> 
+        <meta charset="utf-8">
+        <meta name="description" content="Tekst hier..."> <!--Korte samenvatiing van de inhoud vd pagina -->
+        <meta name="keywords" content="Steekwoorden"> <!-- Steekwoorden voor de pagina -->
+
+        <title>Vogelle</title> <!-- Dit is komt op de tab te staan -->
+
+        <link rel="stylesheet" type="text/css" href="css/main.css"/>
+
+        <meta name="viewport" conten="width=device-width, initial-scale=1.0"/>
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+
+    <!-- ########### BODY ########### -->
+
+    <body>             
+
+        <!-- ######## TOP ######## -->
+
+        <div id="top_nav">      <!-- TOP NAV BEGIN-->
+            <div class="nav_container">
+
+                <h2>Vogelle</h2>
+
+                <h2 id="streak"></h2>
+
+                <form onchange="difficultyChange()">
+                    Moeilijkheid: 
+                    <select id="diffForm">
+                        <option value="25">Makkelijk</option>
+                        <option value="50">Gevorderd</option>
+                        <option value="344">Expert</option>
+                    </select>
+                </form>
+            </div>
+
+        </div>                  <!-- TOP NAV EINDE--> 
+
+        <!-- ######## CONTAINER ######## -->
+
+        <div id="container">    <!-- CONTAINER BEGIN -->
+
+            <h1 id="title">titel</h1>
+
+            <img id="birdImage" class="blacked-out" onclick="birdSound()">
+
+            <br>
+
+            <!--
+<audio controls>
+<source id="birdSound" type="audio/mpeg">
+</audio>
+-->
+
+            <form autocomplete="off" onsubmit="return false">
+                <div class="autocomplete">
+                    <input id="myInput" type="text" placeholder="Vogel">
+                </div>
+                <input type="submit" onclick="checkAnswer()" value="&#128038;">
+
+            </form>
+
+            <div class="win_container">
+                <button id="nextBirdBtn" onclick="nextRound()">Speel nog een ronde ⏯</button>
+                <a id="bird_link" href="http://www.vogelbescherming.nl/ontdek-vogels/kennis-over-vogels/vogelgids/vogel/roodborst">Meer weten over deze vogel🔗</a>
+            </div>
+
+            <div class="submissions_container">
+
+                <div class="submission_stroke">
+                    <H2>Vogel</H2>
+                    <H2>Lengte</H2>
+                    <H2>Groep(en)</H2>
+                </div>
+
+            </div>
+
+            <div class="submissions_container" id="subCont">
+
+
+
+            </div>
+
+
+
+        </div>                  <!-- CONTAINER EINDE -->
+
+        <!-- ######## FOOTER ######## -->
+        <div class="footer"><p>Gemaakt door Jouke met 💙</p></div>
+
+    </body>
+
+</html>
+
+<script src="js/main.js"></script>
+
+<!-- -->
