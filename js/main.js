@@ -1,6 +1,6 @@
 // vogelle - a daily game in progress
 
-let birdNames = []
+let birdNames = [];
 let bird;
 let birds = [];
 
@@ -13,6 +13,8 @@ let streak_amount = 0
 // min 1 max 344
 let difficultyNumber = 25
 
+let rdmBirdArr = [];
+
 async function fetchData(){
     difficultyNumber = await parseInt(document.getElementById("diffForm").value);
 
@@ -23,7 +25,17 @@ async function fetchData(){
     let randomNumber;
 
     if (streak_amount>0){
-        randomNumber = Math.floor(Math.random() * difficultyNumber);
+        
+        if (rdmBirdArr.length >= difficultyNumber){
+            rdmBirdArr.splice(0,rdmBirdArr.length-1);
+        }
+
+        do {
+            randomNumber = Math.floor(Math.random() * difficultyNumber);
+        } while (rdmBirdArr.indexOf(randomNumber) > -1);
+        
+        rdmBirdArr.push(randomNumber);
+        console.log(rdmBirdArr);
 
     } else {
         randomNumber = rdmBirdDay(difficultyNumber);
@@ -67,7 +79,7 @@ async function fetchData(){
 
     document.getElementsByClassName("win_container")[0].style.display = 'none'
 
-//    retrieveProgress();
+    //    retrieveProgress();
 
 
 }
@@ -180,7 +192,7 @@ function checkAnswer(answer = document.getElementById("myInput").value){
 
         subCont.insertBefore(newName, subCont.firstChild);
 
-//        storeProgress(bird.id);
+        //        storeProgress(bird.id);
 
 
     } else {
@@ -317,7 +329,7 @@ function checkAnswer(answer = document.getElementById("myInput").value){
 
                 subCont.insertBefore(newName, subCont.firstChild);
 
-//                storeProgress(birds[i].id);
+                //                storeProgress(birds[i].id);
 
 
                 break
@@ -390,23 +402,29 @@ function autocomplete(inp, arr) {
         /*for each item in the array...*/
         for (i = 0; i < arr.length; i++) {
             /*check if the item starts with the same letters as the text field value:*/
-            if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                /*create a DIV element for each matching element:*/
-                b = document.createElement("DIV");
-                /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
-                /*insert a input field that will hold the current array item's value:*/
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function(e) {
-                    /*insert the value for the autocomplete text field:*/
-                    inp.value = this.getElementsByTagName("input")[0].value;
-                    /*close the list of autocompleted values,
+
+            for (j = 0; j < arr[i].length; j++){
+
+                if (arr[i].substr(j, val.length).toUpperCase() == val.toUpperCase()) {
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = arr[i].substr(0, j);
+                    b.innerHTML += "<strong>" + arr[i].substr(j, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length + j);
+
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function(e) {
+                        /*insert the value for the autocomplete text field:*/
+                        inp.value = this.getElementsByTagName("input")[0].value;
+                        /*close the list of autocompleted values,
               (or any other open lists of autocompleted values:*/
-                    closeAllLists();
-                });
-                a.appendChild(b);
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
             }
         }
     });
@@ -613,7 +631,7 @@ function storeProgress(id){
 
     // get current difficulty
     //  append answer in the right array
-    
+
     let myProgress = JSON.parse(localStorage.getItem("progress"));
 
     if (difficultyNumber < 30 && myProgress.e[myProgress.e.length-1] != id) {
@@ -654,9 +672,9 @@ function retrieveProgress(){
     if (today == JSON.parse(localStorage.getItem("progress")).date){
         // last changed today
         //  put local storage in object
-        
+
         progress = JSON.parse(localStorage.getItem("progress"));
-        
+
         if (difficultyNumber < 30) {
             //easy
             console.log(progress.e);
@@ -669,7 +687,7 @@ function retrieveProgress(){
                 let myBirdName = birdNames[birdId];
 
                 console.log(myBirdName, i);
-//                checkAnswer(myBirdName);
+                //                checkAnswer(myBirdName);
             }
 
 
